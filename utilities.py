@@ -93,6 +93,17 @@ def node_query(network, source, dist):
 
     Return Value: A list of nodes with dist dist after a BFS run.; list
     '''
+    distances, _ = bfs(network, source)
+
+    distanced_nodes = []
+
+    for node in distances:  
+        
+        if distances[node] == dist:
+
+            distanced_nodes.append(node)
+
+    return distanced_nodes
 
 def is_connected(network):
     '''
