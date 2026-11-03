@@ -61,8 +61,25 @@ def path(network, source, dest):
         dest - the node where the desired path will end
 
     Return Value: a list containing a path from soruce to 
-    destination.
+    destination, or an empty list if no path exists.
     '''
+
+    distance, predecessor = bfs(network, source)
+
+    if dest not in distance or distance[dest] == float("inf"):
+        return []
+
+    result =[]
+    current= dest
+    while current is not None:
+        result.append(current)
+        if current == source:
+            break
+        current = predecessor[current]
+
+    result.reverse()
+    return result
+
 
 def node_query(network, source, dist):
     '''
@@ -76,6 +93,17 @@ def node_query(network, source, dist):
 
     Return Value: A list of nodes with dist dist after a BFS run.; list
     '''
+    distances, _ = bfs(network, source)
+
+    distanced_nodes = []
+
+    for node in distances:  
+        
+        if distances[node] == dist:
+
+            distanced_nodes.append(node)
+
+    return distanced_nodes
 
 def is_connected(network):
     '''
